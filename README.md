@@ -33,16 +33,10 @@ Built with Python and pywebview (so it runs as a desktop app with a web-based UI
 ## Requirements
 
 - Python 3.9+
-- Windows, Linux, or macOS
+- Windows
 
 ```bash
 pip install pywebview ping3
-```
-
-On Linux, pywebview needs a GTK or Qt backend:
-
-```bash
-pip install pywebview[gtk]   # or pywebview[qt]
 ```
 
 ---
@@ -88,14 +82,6 @@ Ping requires raw socket access.
 
 **Windows** — run as Administrator, or grant the Python interpreter the required privileges.
 
-**Linux** — either run with `sudo`, or grant the capability once:
-
-```bash
-sudo setcap cap_net_raw+ep $(which python3)
-```
-
-**macOS** — run with `sudo python main.py`.
-
 ---
 
 ## Building a standalone executable
@@ -109,15 +95,6 @@ pyinstaller netwatch.spec
 
 The exe lands in `dist/NETWATCH.exe`. See `netwatch.spec` for the full build config. You need to build on the target OS — cross-compilation isn't supported.
 
-Before building, update `main.py` to use `resource_path()` for the HTML file path so it resolves correctly inside the bundle:
-
-```python
-import sys, os
-
-def resource_path(relative):
-    base = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
-    return os.path.join(base, relative)
-```
 
 ---
 
