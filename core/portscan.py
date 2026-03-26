@@ -90,6 +90,7 @@ def _probe(ip: str, port: int, timeout: float) -> dict:
         if port in tls_ports:
             try:
                 ctx = ssl.create_default_context()
+                ctx.minimum_version = ssl.TLSVersion.TLSv1_2
                 ctx.check_hostname = False
                 ctx.verify_mode    = ssl.CERT_NONE
                 tls_sock = ctx.wrap_socket(sock, server_hostname=ip)
